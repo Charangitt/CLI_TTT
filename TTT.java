@@ -14,6 +14,7 @@ public class TTT {
         System.out.println();
         Scanner scanner = new Scanner(System.in);
         boolean play = true;
+
         // Initialize an empty board. ' ' (space) denotes an empty cell.
         while(play){
             char[][] board = new char[sz][sz];
@@ -25,10 +26,10 @@ public class TTT {
 
              // Start with player 'X' as current player (Vishal).
             char CP = 'X';
-            boolean finished = false;
+            boolean finish = false;
 
             // Main game loop - runs until someone wins or it's a draw.
-            while(!finished){
+            while(!finish){
                 print(board);
                 String s;
                 if(CP=='X') s = "Vishal";
@@ -38,7 +39,8 @@ public class TTT {
                 int row = -1, col = -1;
                  // Read and validate input in a loop until a valid move is entered.
                 while(true){
-                    String line = scanner.nextLine().trim();
+                    String line = scanner.nextLine();
+                    line.trim();
                     String[] parts = line.split("\\s+");
                     if(parts.length!=2){
                         System.out.print("Invalid input. Enter two numbers between 0 and 2 separated by space: ");
@@ -47,7 +49,7 @@ public class TTT {
                     try{
                         row = Integer.parseInt(parts[0]);
                         col = Integer.parseInt(parts[1]);
-                    }catch (NumberFormatException e){
+                    }catch(NumberFormatException e){
                         System.out.print("Invalid numbers. Try again: ");
                         continue;
                     }
@@ -71,11 +73,11 @@ public class TTT {
                     if(CP=='X') st = "Vishal";
                     else st = "Karthik";
                     System.out.println(st+" wins!");
-                    finished = true;
+                    finish = true;
                 }else if(isFull(board)){
                     print(board);
                     System.out.println("It's a draw!");
-                    finished = true;
+                    finish = true;
                 }else
                     CP = CP=='X' ? 'O' : 'X';
                 
